@@ -1,0 +1,21 @@
+name: 'Flyway Hub Migration Test'
+branding:
+  color: purple
+  icon: database
+description: 'Test Flyway migrations on Flyway Hub'
+inputs:
+  projectId:
+    description: 'The id of the Flyway Hub project to test'
+    required: true
+  ref:
+    description: 'The github ref against which tests should run'
+    required: true
+
+outputs: {}
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.projectId }}
+    - ${{ inputs.ref }}
