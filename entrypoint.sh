@@ -1,5 +1,7 @@
 #!/bin/sh
 
+hubhost="https://app-flyway-spawn.staging.spawn.cc"
+
 projectId=$1
 ref=$(echo "$2" | cut -f3 -d'/')
 
@@ -11,7 +13,7 @@ fi
 echo "making POST request to Flyway Hub..."
 headers=$(https --ignore-stdin --check-status --headers \
   POST \
-  app-flyway-spawn.staging.spawn.cc/api/test-migrations \
+  $hubhost/api/test-migrations \
   "Authorization: Bearer $FLYWAY_HUB_ACCESS_TOKEN" \
   projectId:=$projectId \
   branch="$ref")
@@ -30,9 +32,15 @@ fi
 
 echo "response location: $location"
 
+jobId=$(echo $location | grep -o "\d*$")
+if [ -z "$jobId" ]; then
+  echo "failed to parse jobId from Location header"
+  exit 1
+fi
+
 echo "polling for job completion..."
-complete=0
-while [ $complete -ne 1 ]; do
+exitCode=0
+while true ; do
   result=$(https --ignore-stdin --check-status --body \
     $location \
     "Authorization: Bearer $FLYWAY_HUB_ACCESS_TOKEN")
@@ -42,11 +50,19 @@ while [ $complete -ne 1 ]; do
 
   if [ "$status" = "COMPLETED" ]
   then
-    complete=1
+    exitCode=0
+    break
   elif [ "$status" = "FAILED" ]
   then
-    exit 1
+    exitCode=1
+    break
   else
     sleep 1
   fi
 done
+
+echo ""
+echo "test output available on Flyway Hub at: $hubhost/project/$projectId/job/$jobId"
+echo ""
+
+exit $exitCode
