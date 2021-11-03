@@ -36,7 +36,7 @@ if [ -z "$jobId" ]; then
   exit 1
 fi
 
-echo "polling for job completion..."
+echo "polling for test completion..."
 exitCode=0
 while true ; do
   result=$(https --ignore-stdin --check-status --body \
@@ -44,7 +44,7 @@ while true ; do
     "Authorization: Bearer $FLYWAY_HUB_ACCESS_TOKEN")
 
   status=$(echo $result | jq -r '.status')
-  echo "migration job status: $status"
+  echo "migration test status: $status"
 
   if [ "$status" = "COMPLETED" ]
   then
