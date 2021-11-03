@@ -30,8 +30,6 @@ if [ -z "$location" ]; then
   exit 1
 fi
 
-echo "response location: $location"
-
 jobId=$(echo $location | grep -o "\d*$")
 if [ -z "$jobId" ]; then
   echo "failed to parse jobId from Location header"
