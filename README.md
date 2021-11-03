@@ -11,7 +11,6 @@ Migrations are tested by running them against an empty, ephemeral database insta
 | Name            | Description                                                                           | Default          | Required |
 | --------------- | ------------------------------------------------------------------------------------- | ---------------- | -------- |
 | projectId       | The id of the project number to test                                                  | N/A              | Yes      |
-| ref             | The github ref against which tests should run                                         | N/A              | Yes      |
 
 ## Outputs
 
@@ -25,7 +24,6 @@ steps:
     uses: red-gate/flyway-hub-migration-test@v1
     with:
       projectId: 1
-      ref: ${{ github.ref }}
 ```
 
 ## Authentication

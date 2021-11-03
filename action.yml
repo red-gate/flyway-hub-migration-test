@@ -7,9 +7,6 @@ inputs:
   projectId:
     description: 'The id of the Flyway Hub project to test'
     required: true
-  ref:
-    description: 'The github ref against which tests should run'
-    required: true
 
 outputs: {}
 
@@ -18,4 +15,3 @@ runs:
   image: 'Dockerfile'
   args:
     - ${{ inputs.projectId }}
-    - ${{ inputs.ref }}

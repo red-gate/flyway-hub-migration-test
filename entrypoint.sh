@@ -3,7 +3,6 @@
 hubhost="https://app-flyway-spawn.staging.spawn.cc"
 
 projectId=$1
-ref=$(echo "$2" | cut -f3 -d'/')
 
 if [[ -z "$FLYWAY_HUB_ACCESS_TOKEN" ]]; then
     echo "FLYWAY_HUB_ACCESS_TOKEN is not set"
@@ -16,7 +15,7 @@ headers=$(https --ignore-stdin --check-status --headers \
   $hubhost/api/test-migrations \
   "Authorization: Bearer $FLYWAY_HUB_ACCESS_TOKEN" \
   projectId:=$projectId \
-  branch="$ref")
+  hash="$GITHUB_SHA")
 
 locationHeader=$(echo "$headers" | grep 'Location: ')
 if [ -z "$locationHeader" ]; then
