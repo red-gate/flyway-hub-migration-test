@@ -1,6 +1,6 @@
 #!/bin/sh
 
-hubhost="https://app-flyway-spawn.staging.spawn.cc"
+hubhost="https://hub.flywaydb.org"
 
 projectId=$1
 
