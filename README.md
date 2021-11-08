@@ -1,6 +1,6 @@
 # Flyway Hub Migration Test
 
-This action is used in conjunction with Flyway Hub, a service for automated testing of [Flyway](https://flywaydb.org/) migration scripts.
+This action is used in conjunction with [Flyway Hub](https://hub.flywaydb.org), a service for automated testing of [Flyway](https://flywaydb.org/) migration scripts.
 
 Once your Flyway project is configured in Flyway Hub, the project migrations can be easily tested using this Action.
 
