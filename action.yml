@@ -2,7 +2,7 @@ name: 'Flyway Hub Migration Test'
 branding:
   color: purple
   icon: database
-description: 'Test Flyway migrations on Flyway Hub'
+description: 'Test Flyway database migrations on Flyway Hub'
 inputs:
   projectId:
     description: 'The id of the Flyway Hub project to test'
