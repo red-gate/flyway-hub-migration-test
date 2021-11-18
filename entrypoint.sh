@@ -43,7 +43,6 @@ while true ; do
     "Authorization: Bearer $FLYWAY_HUB_ACCESS_TOKEN")
 
   status=$(echo $result | jq -r '.status')
-  echo "migration test status: $status"
 
   if [ "$status" = "COMPLETED" ]
   then
