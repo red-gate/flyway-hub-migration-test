@@ -47,7 +47,7 @@ while true ; do
   if [ "$status" = "COMPLETED" ]
   then
     echo $result | jq --raw-output \
-      '(["Category", "Version", "Path", "Duration"] | (., map(length*"-"))), (.flyway_output | fromjson.migrations[] | [(.category, .version, .filepath, "\(.executionTime)ms")]) | @tsv' \
+      '["CATEGORY", "VERSION", "PATH", "DURATION"], (.flyway_output | fromjson.migrations[] | [(.category, .version, .filepath, "\(.executionTime)ms")]) | @tsv' \
       | column -t
     exitCode=0
     break
