@@ -61,7 +61,7 @@ while true ; do
 done
 
 echo
-echo "test output available on Flyway Hub at: $hubhost/project/$projectId/job/$jobId"
+echo "Full test output available on Flyway Hub at: $hubhost/project/$projectId/job/$jobId"
 echo
 
 exit $exitCode
