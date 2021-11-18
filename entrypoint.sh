@@ -60,8 +60,8 @@ while true ; do
   fi
 done
 
-echo ""
+echo
 echo "test output available on Flyway Hub at: $hubhost/project/$projectId/job/$jobId"
-echo ""
+echo
 
 exit $exitCode
