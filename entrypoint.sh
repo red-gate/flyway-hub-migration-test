@@ -1,5 +1,12 @@
 #!/bin/sh
 
+displaySuccessfulMigrations() {
+  result=$1
+  echo $result | jq --raw-output \
+    '["CATEGORY", "VERSION", "PATH", "DURATION"], (.flyway_output | fromjson.migrations[] | [(.category, .version, .filepath, "\(.executionTime)ms")]) | @tsv' \
+    | column -t
+}
+
 hubhost="https://hub.flywaydb.org"
 
 projectId=$1
@@ -43,14 +50,21 @@ while true ; do
     "Authorization: Bearer $FLYWAY_HUB_ACCESS_TOKEN")
 
   status=$(echo $result | jq -r '.status')
-  echo "migration test status: $status"
 
   if [ "$status" = "COMPLETED" ]
   then
+    echo "Status: $(echo $result | jq --raw-output '.status')"
+    echo
+    displaySuccessfulMigrations "$result"
     exitCode=0
     break
   elif [ "$status" = "FAILED" ]
   then
+    echo "Status: $(echo $result | jq --raw-output '.status')"
+    echo
+    displaySuccessfulMigrations "$result"
+    echo
+    echo $result | jq --raw-output '.flyway_output | fromjson.error.message'
     exitCode=1
     break
   else
@@ -58,8 +72,8 @@ while true ; do
   fi
 done
 
-echo ""
-echo "test output available on Flyway Hub at: $hubhost/project/$projectId/job/$jobId"
-echo ""
+echo
+echo "Full test output available on Flyway Hub at: $hubhost/project/$projectId/job/$jobId"
+echo
 
 exit $exitCode
