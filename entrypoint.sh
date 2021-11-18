@@ -1,5 +1,12 @@
 #!/bin/sh
 
+displaySuccessfulMigrations() {
+  result=$1
+  echo $result | jq --raw-output \
+    '["CATEGORY", "VERSION", "PATH", "DURATION"], (.flyway_output | fromjson.migrations[] | [(.category, .version, .filepath, "\(.executionTime)ms")]) | @tsv' \
+    | column -t
+}
+
 hubhost="https://hub.flywaydb.org"
 
 projectId=$1
@@ -48,13 +55,16 @@ while true ; do
   then
     echo "Status: $(echo $result | jq --raw-output '.status')"
     echo
-    echo $result | jq --raw-output \
-      '["CATEGORY", "VERSION", "PATH", "DURATION"], (.flyway_output | fromjson.migrations[] | [(.category, .version, .filepath, "\(.executionTime)ms")]) | @tsv' \
-      | column -t
+    displaySuccessfulMigrations "$result"
     exitCode=0
     break
   elif [ "$status" = "FAILED" ]
   then
+    echo "Status: $(echo $result | jq --raw-output '.status')"
+    echo
+    displaySuccessfulMigrations "$result"
+    echo
+    echo $result | jq --raw-output '.flyway_output | fromjson.error.message'
     exitCode=1
     break
   else
