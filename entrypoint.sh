@@ -16,13 +16,22 @@ if [[ -z "$FLYWAY_HUB_ACCESS_TOKEN" ]]; then
     exit 1
 fi
 
+if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
+  pr_number=$(cat $GITHUB_EVENT_PATH | jq -r '.number')
+  payload="pr_number:=$pr_number"
+elif [ -z "$GITHUB_REF_NAME" ]; then
+  payload="hash=$GITHUB_SHA"
+else
+  payload="branch=$GITHUB_REF_NAME"
+fi
+
 echo "making POST request to Flyway Hub..."
 headers=$(https --ignore-stdin --check-status --headers \
   POST \
   $hubhost/api/test-migrations \
   "Authorization: Bearer $FLYWAY_HUB_ACCESS_TOKEN" \
   projectId:=$projectId \
-  hash="$GITHUB_SHA")
+  $payload)
 
 locationHeader=$(echo "$headers" | grep 'Location: ')
 if [ -z "$locationHeader" ]; then
