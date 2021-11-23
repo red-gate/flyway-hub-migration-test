@@ -7,6 +7,9 @@ inputs:
   projectId:
     description: 'The id of the Flyway Hub project to test'
     required: true
+  flywayConfPath:
+    description: 'The path to the flyway conf to use when running this migration test'
+    required: false
 
 outputs: {}
 
@@ -15,3 +18,4 @@ runs:
   image: 'Dockerfile'
   args:
     - ${{ inputs.projectId }}
+    - ${{ inputs.flywayConfPath }}

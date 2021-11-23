@@ -10,6 +10,13 @@ displaySuccessfulMigrations() {
 hubhost="https://hub.flywaydb.org"
 
 projectId=$1
+flywayConfPath=$2
+
+if [ -z "$flywayConfPath" ]; then
+  flywayConfPath=null
+else
+  flywayConfPath=\"$flywayConfPath\"
+fi
 
 if [[ -z "$FLYWAY_HUB_ACCESS_TOKEN" ]]; then
     echo "FLYWAY_HUB_ACCESS_TOKEN is not set"
@@ -31,6 +38,7 @@ headers=$(https --ignore-stdin --check-status --headers \
   $hubhost/api/test-migrations \
   "Authorization: Bearer $FLYWAY_HUB_ACCESS_TOKEN" \
   projectId:=$projectId \
+  flywayConf:=$flywayConfPath \
   $payload)
 
 locationHeader=$(echo "$headers" | grep 'Location: ')

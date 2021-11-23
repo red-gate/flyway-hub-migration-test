@@ -11,6 +11,7 @@ Migrations are tested by running them against an empty, ephemeral database insta
 | Name            | Description                                                                           | Default          | Required |
 | --------------- | ------------------------------------------------------------------------------------- | ---------------- | -------- |
 | projectId       | The id of the project number to test                                                  | N/A              | Yes      |
+| flywayConfPath  | The path to the flyway conf to use when running this migration test                   | N/A              | No       |
 
 ## Outputs
 
