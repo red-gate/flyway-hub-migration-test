@@ -10,6 +10,10 @@ inputs:
   flywayConfPath:
     description: 'The path to the flyway conf to use when running this migration test'
     required: false
+  databaseName:
+    description: 'The custom database to create and run the flyway migrations against'
+    required: false
+
 
 outputs: {}
 
@@ -19,3 +23,4 @@ runs:
   args:
     - ${{ inputs.projectId }}
     - ${{ inputs.flywayConfPath }}
+    - ${{ inputs.databaseName }}

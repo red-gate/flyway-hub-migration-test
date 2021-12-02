@@ -11,11 +11,18 @@ hubhost="https://hub.flywaydb.org"
 
 projectId=$1
 flywayConfPath=$2
+databaseName=$3
 
 if [ -z "$flywayConfPath" ]; then
   flywayConfPath=null
 else
   flywayConfPath=\"$flywayConfPath\"
+fi
+
+if [ -z "$databaseName" ]; then
+  databaseName=null
+else
+  databaseName=\"$databaseName\"
 fi
 
 if [[ -z "$FLYWAY_HUB_ACCESS_TOKEN" ]]; then
@@ -39,6 +46,7 @@ headers=$(https --ignore-stdin --check-status --headers \
   "Authorization: Bearer $FLYWAY_HUB_ACCESS_TOKEN" \
   projectId:=$projectId \
   flywayConf:=$flywayConfPath \
+  database_name:=$databaseName \
   $payload)
 
 locationHeader=$(echo "$headers" | grep 'Location: ')
