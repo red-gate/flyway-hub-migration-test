@@ -4,8 +4,11 @@ branding:
   icon: database
 description: 'Test Flyway database migrations on Flyway Hub'
 inputs:
-  projectId:
-    description: 'The id of the Flyway Hub project to test'
+  projectName:
+    description: 'The name of the Flyway Hub project to test'
+    required: true
+  engine:
+    description: 'The database engine that migrations should run against'
     required: true
   flywayConfPath:
     description: 'The path to the flyway conf to use when running this migration test'
@@ -13,7 +16,9 @@ inputs:
   databaseName:
     description: 'The custom database to create and run the flyway migrations against'
     required: false
-
+  migrationDirs:
+    description: 'The directories containing the migration scripts to run'
+    required: true
 
 outputs: {}
 
@@ -21,6 +26,8 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.projectId }}
+    - ${{ inputs.projectName }}
     - ${{ inputs.flywayConfPath }}
     - ${{ inputs.databaseName }}
+    - ${{ inputs.engine }}
+    - ${{ inputs.migrationDirs }}

@@ -1,7 +1,7 @@
-FROM alpine/httpie:2.6.0
-
-RUN apk update && apk add jq util-linux
+FROM public.ecr.aws/j7l4v0f3/flywayhub:latest
 
 COPY entrypoint.sh /entrypoint.sh
+
+USER root
 
 ENTRYPOINT ["/entrypoint.sh"]
