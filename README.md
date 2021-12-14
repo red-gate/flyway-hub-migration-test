@@ -11,8 +11,10 @@ Migrations are tested by running them against an empty, ephemeral database insta
 | Name            | Description                                                                           | Default          | Required |
 | --------------- | ------------------------------------------------------------------------------------- | ---------------- | -------- |
 | projectId       | The id of the project number to test                                                  | N/A              | Yes      |
+| engine          | The database engine that migrations should run against                                | N/A              | Yes      |
 | flywayConfPath  | The path to the flyway conf to use when running this migration test                   | N/A              | No       |
 | databaseName    | The custom database to create and run the flyway migrations against                   | N/A              | No       |
+| migrationDirs   | The directories containing the migration scripts to run                               | N/A              | Yes      |
 
 ## Outputs
 
@@ -25,7 +27,9 @@ steps:
   - name: Test migrations on Flyway Hub
     uses: red-gate/flyway-hub-migration-test@v1
     with:
-      projectId: 1
+      projectName: myproject
+      engine: PostgreSQL (v13.2)
+      migrationDirs: sql
 ```
 
 ## Authentication
