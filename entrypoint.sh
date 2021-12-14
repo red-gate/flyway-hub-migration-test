@@ -29,4 +29,12 @@ else
   branchFlag="--branch=$GITHUB_REF_NAME"
 fi
 
-flywayhub test --project $projectName --engine "$engine" $flywayConfPathFlag $databaseFlag $prNumberFlag $commitHashFlag $branchFlag $@
+flywayhub --verbose test \
+  --project $projectName \
+  --engine "$engine" \
+  $flywayConfPathFlag \
+  $databaseFlag \
+  $prNumberFlag \
+  $commitHashFlag \
+  $branchFlag \
+  $@
