@@ -10,7 +10,7 @@ Migrations are tested by running them against an empty, ephemeral database insta
 
 | Name            | Description                                                                           | Default          | Required |
 | --------------- | ------------------------------------------------------------------------------------- | ---------------- | -------- |
-| projectId       | The id of the project number to test                                                  | N/A              | Yes      |
+| projectName     | The name of the Flyway Hub project to test                                            | N/A              | Yes      |
 | engine          | The database engine that migrations should run against                                | N/A              | Yes      |
 | flywayConfPath  | The path to the flyway conf to use when running this migration test                   | N/A              | No       |
 | databaseName    | The custom database to create and run the flyway migrations against                   | N/A              | No       |
