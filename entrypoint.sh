@@ -13,11 +13,11 @@ if [[ -z "$FLYWAYHUB_ACCESS_TOKEN" ]]; then
 fi
 
 if [ "$flywayConfPath" != "" ]; then
-  flywayConfPathFlag="--flywayconf=\"$flywayConfPath\""
+  flywayConfPathFlag="--flywayconf=$flywayConfPath"
 fi
 
 if [ "$databaseName" != "" ]; then
-  databaseFlag="--database=\"$databaseName\""
+  databaseFlag="--database=$databaseName"
 fi
 
 if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
