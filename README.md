@@ -32,6 +32,19 @@ steps:
       migrationDirs: sql
 ```
 
+## Supported database engines
+
+Valid arguments for the `engine` input are:
+
+* SQL Server (v2017)
+* SQL Server (v2019)
+* PostgreSQL (v11.0)
+* PostgreSQL (v12.0)
+* PostgreSQL (v13.2)
+* MySQL (v5.7)
+* MySQL (v8.0)
+* MariaDB (v10.6)
+
 ## Authentication
 
 This action requires a Flyway Hub access token to access the Flyway Hub API.
