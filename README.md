@@ -10,7 +10,7 @@ Migrations are tested by running them against an empty, ephemeral database insta
 
 | Name            | Description                                                                           | Default          | Required |
 | --------------- | ------------------------------------------------------------------------------------- | ---------------- | -------- |
-| projectId       | The id of the project number to test                                                  | N/A              | Yes      |
+| projectName     | The name of the Flyway Hub project to test                                            | N/A              | Yes      |
 | engine          | The database engine that migrations should run against                                | N/A              | Yes      |
 | flywayConfPath  | The path to the flyway conf to use when running this migration test                   | N/A              | No       |
 | databaseName    | The custom database to create and run the flyway migrations against                   | N/A              | No       |
@@ -31,6 +31,19 @@ steps:
       engine: PostgreSQL (v13.2)
       migrationDirs: sql
 ```
+
+## Supported database engines
+
+Valid arguments for the `engine` input are:
+
+* SQL Server (v2017)
+* SQL Server (v2019)
+* PostgreSQL (v11.0)
+* PostgreSQL (v12.0)
+* PostgreSQL (v13.2)
+* MySQL (v5.7)
+* MySQL (v8.0)
+* MariaDB (v10.6)
 
 ## Authentication
 
