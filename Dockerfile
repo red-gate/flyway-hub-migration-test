@@ -1,4 +1,4 @@
-FROM public.ecr.aws/j7l4v0f3/flywayhub:eafb384d96d70f1d1d9d61ca0cf506c375d1a4d1
+FROM public.ecr.aws/j7l4v0f3/flywayhub:d7bc96f23ebccf84ecbcc8db667969670f19360d
 
 COPY entrypoint.sh /entrypoint.sh
 
