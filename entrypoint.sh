@@ -32,6 +32,7 @@ fi
 flywayhub --verbose test \
   --project $projectName \
   --engine "$engine" \
+  --initiator "Github Actions" \
   $flywayConfPathFlag \
   $databaseFlag \
   $prNumberFlag \
