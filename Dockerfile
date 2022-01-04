@@ -1,4 +1,4 @@
-FROM public.ecr.aws/j7l4v0f3/flywayhub:d7bc96f23ebccf84ecbcc8db667969670f19360d
+FROM public.ecr.aws/j7l4v0f3/flywayhub:58bb022e707b407c0214f316efea853c30ee6ed7
 
 USER root
 
