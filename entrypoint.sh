@@ -1,41 +1,12 @@
-#!/bin/bash
+#!/bin/sh
 
-projectName=$1
-flywayConfPath=$2
-databaseName=$3
-engine=$4
+hubhost="https://hub.flywaydb.org"
 
-shift 4
+echo
+echo "========================================================================================================"
+echo "v2 and v3 of this action is deprecated."
+echo "Delete this workflow and go to $hubhost/projects"
+echo "From there, select your project and hit the 'Configure automated checks' button to create a new one."
+echo "========================================================================================================"
 
-if [[ -z "$FLYWAYHUB_ACCESS_TOKEN" ]]; then
-    echo "FLYWAYHUB_ACCESS_TOKEN is not set"
-    exit 1
-fi
-
-if [ "$flywayConfPath" != "" ]; then
-  flywayConfPathFlag="--flywayconf=$flywayConfPath"
-fi
-
-if [ "$databaseName" != "" ]; then
-  databaseFlag="--database=$databaseName"
-fi
-
-if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
-  pr_number=$(cat $GITHUB_EVENT_PATH | jq -r '.number')
-  prNumberFlag="--pr-number=$pr_number"
-elif [ -z "$GITHUB_REF_NAME" ]; then
-  commitHashFlag="--commit-hash=$GITHUB_SHA"
-else
-  branchFlag="--branch=$GITHUB_REF_NAME"
-fi
-
-flywayhub --verbose test \
-  --project $projectName \
-  --engine "$engine" \
-  --initiator "Github Actions" \
-  $flywayConfPathFlag \
-  $databaseFlag \
-  $prNumberFlag \
-  $commitHashFlag \
-  $branchFlag \
-  $@
+exit 1
